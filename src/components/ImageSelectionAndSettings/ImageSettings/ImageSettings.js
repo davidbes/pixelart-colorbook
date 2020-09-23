@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './ImageSettings.scss';
 import SelectPaper from '../../../components-UI/Select/Select';
+import Input from '../../../components-UI/Input/Input';
 
 const paperSizes = [
 	{
@@ -53,20 +54,7 @@ const ImageSettings = ({ imageDimensions }) => {
 	}, [imageDimensions]);
 
 	const updateInput = useCallback(({ target }) => {
-		switch (target.name) {
-			case 'maxColors':
-				// todo set color limit
-				setMaxColors(target.value);
-				break;
-			case 'pixelsHeight':
-				break;
-			case 'pixelsWidth':
-				setPixelsWidth(target.value);
-				setpixelsHeight(target.value);
-				break;
-			default:
-				break;
-		}
+		console.log(target);
 	}, []);
 
 	return (
@@ -74,25 +62,9 @@ const ImageSettings = ({ imageDimensions }) => {
 			<div className='section-title'>Color book difficulty</div>
 			<div className='row'>
 				<div className='dimensions'>
-					<div className='col'>
-						<input
-							name='pixelsWidth'
-							type='number'
-							value={pixelsWidth}
-							onChange={updateInput}
-						/>
-						<div className='col-title'>WIDTH</div>
-					</div>
+					<Input subTitle='WIDTH' name='width' onChange={updateInput} value={pixelsWidth} />
 					<div className='x'>x</div>
-					<div className='col'>
-						<input
-							name='pixelsHeight'
-							type='number'
-							value={pixelsHeight}
-							onChange={updateInput}
-						/>
-						<div className='col-title'>HEIGHT</div>
-					</div>
+					<Input subTitle='HEIGHT' name='height' onChange={updateInput} value={pixelsHeight} />
 				</div>
 			</div>
 			<div className='section-title'>Paper size</div>
@@ -102,24 +74,24 @@ const ImageSettings = ({ imageDimensions }) => {
 					options={paperSizes}
 					returnSelectedOption={setPaperSize}
 				/>
-				<div>
-					<div className='col-title'>WHITESPACE</div>
-					<input name='whitespace' type='number' value={whitespace} onChange={updateInput} />
-
-					<div className='col-title'>MM</div>
-				</div>
-				<div>
-					<div className='col-title'>SQUARE SIZE</div>
-					<input name='squareSize' type='number' value={squareSize} onChange={updateInput} />
-					<div className='col-title'>MM</div>
-				</div>
+				<Input
+					title='WHITESPACE'
+					name='whitespace'
+					onChange={updateInput}
+					value={whitespace}
+					subTitle='MM'
+				/>
+				<Input
+					title='SQUARE SIZE'
+					name='squareSize'
+					onChange={updateInput}
+					value={squareSize}
+					subTitle='MM'
+				/>
 			</div>
 			<div className='section-title'>Color Palette Settings</div>
 			<div className='row'>
-				<div className='col'>
-					<div className='col-title'>MAX COLORS</div>
-					<input name='maxColors' type='number' value={maxColors} onChange={updateInput} />
-				</div>
+				<Input title='MAX COLORS' name='maxColors' onChange={updateInput} value={maxColors} />
 			</div>
 		</div>
 	);
