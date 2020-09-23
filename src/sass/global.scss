@@ -1,0 +1,26 @@
+@import './variables';
+
+body {
+	display: block;
+	margin: 0;
+	font-family: 'Asap', sans-serif;
+	background-color: $darkBlue;
+}
+
+.title {
+	font-size: 45px;
+	text-align: center;
+	font-weight: 700;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+	-moz-appearance: textfield;
+}
