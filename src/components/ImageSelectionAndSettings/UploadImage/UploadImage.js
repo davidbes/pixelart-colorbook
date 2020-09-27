@@ -7,24 +7,27 @@ import './UploadImage.scss';
 
 const UploadImage = ({ returnImageSrc, returnFileName }) => {
 	// Recieve files with this callback
-	const onDrop = useCallback((acceptedFiles, fileRejections, event) => {
-		// todo handle errors
-		if (fileRejections.length) {
-			return;
-		}
-		if (!acceptedFiles.length) return;
+	const onDrop = useCallback(
+		(acceptedFiles, fileRejections, event) => {
+			// todo handle errors
+			if (fileRejections.length) {
+				return;
+			}
+			if (!acceptedFiles.length) return;
 
-		const file = acceptedFiles[0];
+			const file = acceptedFiles[0];
 
-		const fileName = file.name;
+			const fileName = file.name;
 
-		const reader = new FileReader();
-		reader.onload = ({ target: { result } }) => {
-			returnImageSrc(result);
-			returnFileName(fileName);
-		};
-		reader.readAsDataURL(file);
-	}, []);
+			const reader = new FileReader();
+			reader.onload = ({ target: { result } }) => {
+				returnImageSrc(result);
+				returnFileName(fileName);
+			};
+			reader.readAsDataURL(file);
+		},
+		[returnImageSrc, returnFileName]
+	);
 
 	// Input Hook
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -41,7 +44,7 @@ const UploadImage = ({ returnImageSrc, returnFileName }) => {
 				})}>
 				<input {...getInputProps()} />
 				<div className='text-div'>
-					<img src={uploadImage} />
+					<img alt='upload' src={uploadImage} />
 
 					<div className='bigger'> Drop image here</div>
 					<div className='smaller'>or click here to select it from files</div>

@@ -4,23 +4,12 @@ import UploadImage from './UploadImage/UploadImage';
 import PreviewImage from './PreviewImage/PreviewImage';
 import ImageSettings from './ImageSettings/ImageSettings';
 
-import image from '../../assets/images/image.png';
-
-const ImageSelectionAndSettings = ({ processInProgress, saveData }) => {
+// todo this is temporary for quicker testing
+const ImageSelectionAndSettings = ({ saveData }) => {
 	const [imageSrc, setImageSrc] = useState(null);
-	// const [imageSrc, setImageSrc] = useState(image); TODO DELETE
 	const [fileName, setFileName] = useState(null);
 	const [imageDimensions, setImageDimensions] = useState({});
-
-	const [pixelHeight, setPixelHeight] = useState(null);
-	const [pixelWidth, setpixelWidth] = useState(null);
-
-	const [maxColors, setMaxColors] = useState(10);
-	const [predefinedColors, setPredefinedColors] = useState([]);
-
-	const [paperSize, setPaperSize] = useState(null);
-	const [whiteSpace, setWhiteSpace] = useState(null);
-	const [squareSize, setsquareSize] = useState(null);
+	const [settings, setSettings] = useState({});
 
 	const clearImageData = useCallback(() => {
 		setImageSrc(null);
@@ -28,16 +17,12 @@ const ImageSelectionAndSettings = ({ processInProgress, saveData }) => {
 
 	const buttonClick = useCallback(() => {
 		saveData({
-			imageSrc,
-			pixelHeight,
-			pixelWidth,
-			maxColors,
-			predefinedColors,
-			paperSize,
-			whiteSpace,
-			squareSize,
+			imageSrc: imageSrc,
+			fileName: fileName,
+			imageDimensions: imageDimensions,
+			settings: settings,
 		});
-	}, []);
+	}, [imageSrc, fileName, imageDimensions, settings, saveData]);
 
 	return (
 		<>
@@ -47,12 +32,13 @@ const ImageSelectionAndSettings = ({ processInProgress, saveData }) => {
 					<UploadImage returnImageSrc={setImageSrc} returnFileName={setFileName} />
 				)) || (
 					<>
-						<ImageSettings imageDimensions={imageDimensions} />
+						<ImageSettings imageDimensions={imageDimensions} returnSettings={setSettings} />
 						<PreviewImage
 							imageSrc={imageSrc}
 							fileName={fileName}
 							returnImgDimensions={setImageDimensions}
 							clearImageData={clearImageData}
+							returnSettings={setSettings}
 						/>
 					</>
 				)}

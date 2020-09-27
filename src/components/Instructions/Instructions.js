@@ -1,7 +1,7 @@
 import React from 'react';
 import './Instructions.scss';
 
-const Introduction = ({}) => {
+const Introduction = () => {
 	return (
 		<div className='instructions-wrapper'>
 			<p>

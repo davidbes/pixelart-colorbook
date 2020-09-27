@@ -29,7 +29,7 @@ const Select = ({ selected, options, returnSelectedOption }) => {
 
 	useEffect(() => {
 		returnSelectedOption(selectedOption);
-	}, [selectedOption]);
+	}, [selectedOption, returnSelectedOption]);
 
 	return (
 		<div className='select'>

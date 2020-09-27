@@ -19,13 +19,14 @@ const PreviewImage = ({ imageSrc, fileName, returnImgDimensions, clearImageData 
 			setImageHeight(100);
 			setImageWidth(100);
 		};
-	}, [imageSrc]);
+	}, [imageSrc, returnImgDimensions]);
 
 	return (
 		<div className='preview-image'>
 			{imageSrc && (
 				<div className='image-wrapper'>
 					<img
+						alt='display'
 						src={imageSrc}
 						style={{
 							width: imageWidth >= imageHeight ? '60%' : 'auto',

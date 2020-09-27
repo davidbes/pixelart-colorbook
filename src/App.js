@@ -1,15 +1,14 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import './sass/global.scss';
 import { Card, Divider } from './components-UI';
-import { Instructions, ImageSelectionAndSettings } from './components';
+import {
+	Instructions,
+	ImageSelectionAndSettings,
+	GeneratedPaletteAndColorBook,
+} from './components';
 
 function App() {
-	const [dataLoading, setDataLoading] = useState(false);
-
-	const getImageDataSettings = useCallback(data => {
-		setDataLoading(true);
-		console.log(data);
-	}, []);
+	const [data, setData] = useState(null);
 
 	return (
 		<div className='body-background'>
@@ -17,15 +16,9 @@ function App() {
 				<h1 className='title'>Create pixel art from any image</h1>
 				<Instructions></Instructions>
 				<Divider />
-				<ImageSelectionAndSettings
-					processInProgress={dataLoading}
-					saveData={getImageDataSettings}
-				/>
+				<ImageSelectionAndSettings saveData={setData} />
 				<Divider />
-
-				{/* Intro and instructions */}
-				{/* Image upload and settings */}
-				{/* Generate */}
+				{data && <GeneratedPaletteAndColorBook data={data} />}
 			</Card>
 		</div>
 	);
