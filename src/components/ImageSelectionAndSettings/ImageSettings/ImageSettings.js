@@ -36,8 +36,8 @@ const paperSizes = [
 ];
 
 const ImageSettings = ({ imageDimensions: { imageWidth, imageHeight }, returnSettings }) => {
-	const [pixelsWidth, setPixelsWidth] = useState();
-	const [pixelsHeight, setpixelsHeight] = useState();
+	const [pixelsWidth, setPixelsWidth] = useState(undefined);
+	const [pixelsHeight, setpixelsHeight] = useState(undefined);
 	const [ratio, setRatio] = useState(1);
 	const [pixelizationLevel, setPixelizationLevel] = useState(5);
 	// const [whitespace, setWhitespace] = useState(21); //todo whitespace
@@ -46,11 +46,13 @@ const ImageSettings = ({ imageDimensions: { imageWidth, imageHeight }, returnSet
 	const [maxColors, setMaxColors] = useState(15);
 
 	useEffect(() => {
-		setpixelsHeight(imageHeight / pixelizationLevel);
-		setPixelsWidth(imageWidth / pixelizationLevel);
-		const ratio = imageHeight / imageWidth;
-		setRatio(ratio);
-	}, [imageWidth, imageHeight, pixelizationLevel]);
+		if (imageHeight && imageWidth && pixelizationLevel) {
+			setpixelsHeight(Math.round(imageHeight / pixelizationLevel));
+			setPixelsWidth(Math.round(imageWidth / pixelizationLevel));
+			const ratio = imageHeight / imageWidth;
+			setRatio(ratio);
+		}
+	}, [imageHeight, imageWidth, pixelizationLevel]);
 
 	const updateInput = useCallback(
 		({ target }) => {

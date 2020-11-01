@@ -7,9 +7,19 @@ const Introduction = () => {
 			<p>
 				If you are looking for a creative gift this is the place for you. Just upload any image
 				of your choice and we will pixelate it, extract dominant colors and create a color by
-				number sheet. If you enjoy our service, consider donating or even becoming a patreon.
+				number for you. Right now, you can download the colorbook and palette as an image and
+				print it yourself, but our plan for the future is to provide a service where you just
+				order the picture and we deliver it to you along with all the equipment needed.
 			</p>
-			<p>Better features coming soon :)</p>
+			<p>
+				Right now, you can download the colorbook and palette as an image and print it yourself,
+				but our plan for the future is to provide a service where you just order the picture and
+				we deliver it to you along with all the equipment needed.
+			</p>
+			<p>
+				We have a lot more in minds, but we first want to test the reviews this application
+				gets. (We will be optimising the performance of course)
+			</p>
 		</div>
 	);
 };

@@ -4,7 +4,6 @@ import UploadImage from './UploadImage/UploadImage';
 import PreviewImage from './PreviewImage/PreviewImage';
 import ImageSettings from './ImageSettings/ImageSettings';
 
-// todo this is temporary for quicker testing
 const ImageSelectionAndSettings = ({ saveData }) => {
 	const [imageSrc, setImageSrc] = useState(null);
 	const [fileName, setFileName] = useState(null);
