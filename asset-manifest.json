@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/pixelart-colorbook/static/css/main.1aba2a3d.chunk.css",
+    "main.js": "/pixelart-colorbook/static/js/main.f1b82e5e.chunk.js",
+    "main.js.map": "/pixelart-colorbook/static/js/main.f1b82e5e.chunk.js.map",
+    "runtime-main.js": "/pixelart-colorbook/static/js/runtime-main.c91c34a3.js",
+    "runtime-main.js.map": "/pixelart-colorbook/static/js/runtime-main.c91c34a3.js.map",
+    "static/js/2.7374ed73.chunk.js": "/pixelart-colorbook/static/js/2.7374ed73.chunk.js",
+    "static/js/2.7374ed73.chunk.js.map": "/pixelart-colorbook/static/js/2.7374ed73.chunk.js.map",
+    "index.html": "/pixelart-colorbook/index.html",
+    "precache-manifest.4abb9773ee7d3bdd6451474aeeaf2078.js": "/pixelart-colorbook/precache-manifest.4abb9773ee7d3bdd6451474aeeaf2078.js",
+    "service-worker.js": "/pixelart-colorbook/service-worker.js",
+    "static/css/main.1aba2a3d.chunk.css.map": "/pixelart-colorbook/static/css/main.1aba2a3d.chunk.css.map",
+    "static/js/2.7374ed73.chunk.js.LICENSE.txt": "/pixelart-colorbook/static/js/2.7374ed73.chunk.js.LICENSE.txt",
+    "static/media/PreviewImage.scss": "/pixelart-colorbook/static/media/grid.91cab6ad.png",
+    "static/media/upload-image.svg": "/pixelart-colorbook/static/media/upload-image.aaf7c419.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c91c34a3.js",
+    "static/js/2.7374ed73.chunk.js",
+    "static/css/main.1aba2a3d.chunk.css",
+    "static/js/main.f1b82e5e.chunk.js"
+  ]
+}
