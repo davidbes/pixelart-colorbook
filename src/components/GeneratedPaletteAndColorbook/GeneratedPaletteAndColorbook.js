@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react';
 import domtoimage from 'dom-to-image-more';
 import quantize from 'quantize';
+import { createPixelArray } from '../../utils/createPixelArray';
 import { deltaE } from '../../utils/deltaE';
-import { downloadImage } from '../../utils/downloadImage';
-import allRalColors from '../../palette.json';
+import Palette from './Palette';
+import allRalColors from '../../assets/data/palette.json';
 import './GeneratedPaletteAndColorbook.scss';
+
 const GeneratedPaletteAndColorBook = ({ data }) => {
 	const [pixelData, setPixelData] = useState([]);
 	const [colorPalette, setColorPalette] = useState([]);
@@ -105,39 +107,21 @@ const GeneratedPaletteAndColorBook = ({ data }) => {
 			};
 			img.src = data.imageSrc;
 		}
-	}, [height, width, maxColors, data.imageSrc]);
-
-	const ColorPalette = useMemo(() => {
-		return (
-			colorPalette &&
-			colorPalette.length > 0 && (
-				<div className='color-palette'>
-					{colorPalette.map(color => {
-						return (
-							<div
-								key={color.ral.ral}
-								className='color-block'
-								style={{
-									display: 'inline-block',
-									height: '50px',
-									width: '50px',
-									margin: '10px',
-									background: `rgb(${color.ral.rgb})`,
-								}}
-							/>
-						);
-					})}
-				</div>
-			)
-		);
-	}, [colorPalette]);
+	}, [height, width, maxColors, data.imageSrc, squareSize]);
 
 	const componentRef = useRef();
+	const paletteRef = useRef();
 
 	const generateSVG = useCallback(() => {
 		domtoimage.toSvg(componentRef.current).then(function (dataUrl) {
 			const link = document.createElement('a');
-			link.download = 'my-image-name.svg';
+			link.download = 'colorbook.svg';
+			link.href = dataUrl;
+			link.click();
+		});
+		domtoimage.toSvg(paletteRef.current).then(function (dataUrl) {
+			const link = document.createElement('a');
+			link.download = 'palette.svg';
 			link.href = dataUrl;
 			link.click();
 		});
@@ -146,7 +130,13 @@ const GeneratedPaletteAndColorBook = ({ data }) => {
 	const generateJPG = useCallback(() => {
 		domtoimage.toJpeg(componentRef.current).then(function (dataUrl) {
 			const link = document.createElement('a');
-			link.download = 'my-image-name.jpeg';
+			link.download = 'colorbook.jpeg';
+			link.href = dataUrl;
+			link.click();
+		});
+		domtoimage.toJpeg(paletteRef.current).then(function (dataUrl) {
+			const link = document.createElement('a');
+			link.download = 'palette.jpeg';
 			link.href = dataUrl;
 			link.click();
 		});
@@ -155,17 +145,38 @@ const GeneratedPaletteAndColorBook = ({ data }) => {
 	const genreatePNG = useCallback(() => {
 		domtoimage.toPng(componentRef.current).then(function (dataUrl) {
 			const link = document.createElement('a');
-			link.download = 'my-image-name.png';
+			link.download = 'colorbook.png';
+			link.href = dataUrl;
+			link.click();
+		});
+		domtoimage.toPng(paletteRef.current).then(function (dataUrl) {
+			const link = document.createElement('a');
+			link.download = 'palette.png';
 			link.href = dataUrl;
 			link.click();
 		});
 	}, [componentRef]);
 
+	function isSameSquarePalette(box, original) {
+		if (!original || !box) return false;
+		if (typeof original === 'string') {
+			return original === box;
+		} else if (Array.isArray(original)) {
+			return original.includes(box);
+		} else return false;
+	}
+
 	return (
 		<div className='result-row'>
 			<div>
-				{ColorPalette}
 				Colors generated {colorPalette && colorPalette.length}
+				<div style={{ maxHeight: '700px', overflow: 'scroll', width: '100%' }}>
+					<div ref={paletteRef}>
+						{colorPalette && colorPalette.length > 0 && (
+							<Palette palette={colorPalette}></Palette>
+						)}
+					</div>
+				</div>
 				<div>
 					{shouldColor ? 'Showing "result"' : 'Showing blank'}
 					<input
@@ -211,6 +222,7 @@ const GeneratedPaletteAndColorBook = ({ data }) => {
 													row.columns[index + 1].join(',')) ||
 												null,
 										};
+
 										const columnData =
 											(colorPalette &&
 												colorPalette.length > 0 &&
@@ -240,18 +252,10 @@ const GeneratedPaletteAndColorBook = ({ data }) => {
 												className='colorbook-column'
 												style={{
 													fontSize: `${squareSize * 2}px`,
-													borderTop:
-														!shouldColor &&
-														`0.2px solid ${!isTopEq ? '#5d5d5d' : 'white'}`,
-													borderBottom:
-														!shouldColor &&
-														`0.2px solid ${!isBotEq ? '#5d5d5d' : 'white'}`,
-													borderRight:
-														!shouldColor &&
-														`0.2px solid ${!isRightEq ? '#5d5d5d' : 'white'}`,
-													borderLeft:
-														!shouldColor &&
-														`0.2px solid ${!isLeftEq ? '#5d5d5d' : 'white'}`,
+													borderTop: !shouldColor && createBorder(isTopEq),
+													borderBottom: !shouldColor && createBorder(isBotEq),
+													borderRight: !shouldColor && createBorder(isRightEq),
+													borderLeft: !shouldColor && createBorder(isLeftEq),
 													background: shouldColor
 														? columnData &&
 														  columnData.ral &&
@@ -286,25 +290,4 @@ const GeneratedPaletteAndColorBook = ({ data }) => {
 
 export default GeneratedPaletteAndColorBook;
 
-function createPixelArray(imgData, pixelCount) {
-	const pixels = imgData;
-	const pixelArray = [];
-	for (let i = 0, offset, r, g, b; i < pixelCount; i++) {
-		offset = i * 4;
-		r = pixels[offset + 0];
-		g = pixels[offset + 1];
-		b = pixels[offset + 2];
-
-		pixelArray.push([r, g, b, 255]);
-	}
-	return pixelArray;
-}
-
-function isSameSquarePalette(box, original) {
-	if (!original || !box) return false;
-	if (typeof original === 'string') {
-		return original === box;
-	} else if (Array.isArray(original)) {
-		return original.includes(box);
-	} else return false;
-}
+const createBorder = isSideEqual => `0.2px solid ${isSideEqual ? '#FFFFFF' : '#5D5D5D'}`;

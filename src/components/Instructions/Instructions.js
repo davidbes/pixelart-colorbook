@@ -11,15 +11,6 @@ const Introduction = () => {
 				print it yourself, but our plan for the future is to provide a service where you just
 				order the picture and we deliver it to you along with all the equipment needed.
 			</p>
-			<p>
-				Right now, you can download the colorbook and palette as an image and print it yourself,
-				but our plan for the future is to provide a service where you just order the picture and
-				we deliver it to you along with all the equipment needed.
-			</p>
-			<p>
-				We have a lot more in minds, but we first want to test the reviews this application
-				gets. (We will be optimising the performance of course)
-			</p>
 		</div>
 	);
 };

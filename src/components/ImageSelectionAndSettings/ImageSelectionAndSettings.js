@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import './ImageSelectionAndSettings.scss';
-import UploadImage from './UploadImage/UploadImage';
-import PreviewImage from './PreviewImage/PreviewImage';
 import ImageSettings from './ImageSettings/ImageSettings';
+import PreviewImage from './PreviewImage/PreviewImage';
+import UploadImage from './UploadImage/UploadImage';
+import './ImageSelectionAndSettings.scss';
 
 const ImageSelectionAndSettings = ({ saveData }) => {
 	const [imageSrc, setImageSrc] = useState(null);

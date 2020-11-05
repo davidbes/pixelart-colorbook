@@ -1,39 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './ImageSettings.scss';
 import SelectPaper from '../../../components-UI/Select/Select';
-
-const paperSizes = [
-	{
-		key: 'A0',
-		height: 1189,
-		width: 841,
-	},
-	{
-		key: 'A1',
-		height: 841,
-		width: 594,
-	},
-	{
-		key: 'A2',
-		height: 594,
-		width: 420,
-	},
-	{
-		key: 'A3',
-		height: 420,
-		width: 297,
-	},
-	{
-		key: 'A4',
-		height: 297,
-		width: 210,
-	},
-	{
-		key: 'A5',
-		height: 210,
-		width: 148,
-	},
-];
+import paperSizes from '../../../assets/data/paperSizes.json';
 
 const ImageSettings = ({ imageDimensions: { imageWidth, imageHeight }, returnSettings }) => {
 	const [pixelsWidth, setPixelsWidth] = useState(undefined);
@@ -166,7 +134,7 @@ const ImageSettings = ({ imageDimensions: { imageWidth, imageHeight }, returnSet
 			<div className='row'>
 				<div className='col'>
 					<div className='col-title'>MAX COLORS</div>
-					<input name='maxColors' onChange={updateInput} value={maxColors} />
+					<input name='maxColors' type='number' onChange={updateInput} value={maxColors} />
 				</div>
 			</div>
 		</div>
