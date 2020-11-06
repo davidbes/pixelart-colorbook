@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7da36212e8cac4ca96fa1133faf1a8c4",
+    "revision": "8307726213387fcfc7a33fe205bfecdd",
     "url": "/pixelart-colorbook/index.html"
   },
   {
-    "revision": "8d66e34540815f360b49",
+    "revision": "93ff2d8a2c630afdce54",
     "url": "/pixelart-colorbook/static/css/main.cdaebc56.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pixelart-colorbook/static/js/2.0b7e018a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8d66e34540815f360b49",
-    "url": "/pixelart-colorbook/static/js/main.2f41b2ce.chunk.js"
+    "revision": "93ff2d8a2c630afdce54",
+    "url": "/pixelart-colorbook/static/js/main.58c84dea.chunk.js"
   },
   {
     "revision": "1b1367d0f053e043f888",
