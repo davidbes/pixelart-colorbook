@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './PreviewImage.scss';
 
 const PreviewImage = ({ imageSrc, fileName, returnImgDimensions, clearImageData }) => {
-	const [imageWidth, setImageWidth] = useState(100);
-	const [imageHeight, setImageHeight] = useState(100);
+	const [imageWidth, setImageWidth] = useState(0);
+	const [imageHeight, setImageHeight] = useState(0);
 
 	// Calculate image dimensions
 	useEffect(() => {
@@ -15,10 +15,6 @@ const PreviewImage = ({ imageSrc, fileName, returnImgDimensions, clearImageData 
 			returnImgDimensions({ imageHeight: img.height, imageWidth: img.width });
 		};
 		img.src = imageSrc;
-		return () => {
-			setImageHeight(100);
-			setImageWidth(100);
-		};
 	}, [imageSrc, returnImgDimensions]);
 
 	return (

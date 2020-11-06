@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 
 const PaletteDiv = styled.div`
 	display: grid;
+	width: 100%;
+	height: 100%;
 	grid-template-columns: 1fr 1fr;
 	grid-auto-rows: 100px;
 	grid-gap: 10px;
-	margin-right: 20px;
-	margin-left: 20px;
+	overflow: auto;
 `;
 
 const ColorDiv = styled.div`
@@ -35,10 +36,10 @@ const ColorDiv = styled.div`
 	.info {
 		width: 100%;
 		margin: auto;
-		height: 80px;
+		height: 78px;
 		padding: 10px;
 		background: #fff;
-
+		border: 1px solid gray;
 		.code {
 			font-size: 22px;
 			font-weight: bold;
@@ -50,22 +51,31 @@ const ColorDiv = styled.div`
 	}
 `;
 
-const Palette = ({ palette = [] }) => {
+const Palette = ({ palette, sendRef }) => {
 	const [sortedPalette, setSortedPalette] = useState([]);
+	const paletteRef = useRef(null);
 	useEffect(() => {
 		setSortedPalette(
-			palette.sort((colA, colB) => {
-				const ralCodeA = colA.ral.ral.split(' ')[1];
-				const ralCodeB = colB.ral.ral.split(' ')[1];
-				return ralCodeA - ralCodeB;
-			})
+			(palette &&
+				palette.sort((colA, colB) => {
+					const ralCodeA = colA.ral.ral.split(' ')[1];
+					const ralCodeB = colB.ral.ral.split(' ')[1];
+					return ralCodeA - ralCodeB;
+				})) ||
+				[]
 		);
 	}, [palette]);
+
+	useEffect(() => {
+		sendRef(paletteRef);
+	}, [sendRef, paletteRef]);
+
 	return (
-		<PaletteDiv>
+		<PaletteDiv ref={paletteRef}>
 			{sortedPalette.length > 0 &&
 				sortedPalette.map(color => (
 					<Color
+						key={color.ral.code}
 						ral={color.ral.ral}
 						code={color.ral.code}
 						name={color.ral.name}

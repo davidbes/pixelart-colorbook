@@ -6,10 +6,8 @@ import {
 	ImageSelectionAndSettings,
 	GeneratedPaletteAndColorBook,
 } from './components';
-
 function App() {
 	const [data, setData] = useState(null);
-
 	return (
 		<div className='body-background'>
 			<Card>
@@ -18,7 +16,14 @@ function App() {
 				<Divider />
 				<ImageSelectionAndSettings saveData={setData} />
 				<Divider />
-				{data && <GeneratedPaletteAndColorBook data={data} />}
+				{data && (
+					<GeneratedPaletteAndColorBook
+						palette={data.palette}
+						pixels={data.pixels}
+						squareSize={data.squareSize}
+						fileName={data.fileName}
+					/>
+				)}
 			</Card>
 		</div>
 	);
