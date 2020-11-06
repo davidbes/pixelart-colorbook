@@ -2,13 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 
 const PaletteDiv = styled.div`
-	display: grid;
-	width: 100%;
-	height: 100%;
-	grid-template-columns: 1fr 1fr;
-	grid-auto-rows: 100px;
-	grid-gap: 10px;
 	overflow: auto;
+	height: 100%;
+	width: 100%;
+	.content {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-auto-rows: 100px;
+		grid-gap: 10px;
+	}
 `;
 
 const ColorDiv = styled.div`
@@ -71,17 +75,19 @@ const Palette = ({ palette, sendRef }) => {
 	}, [sendRef, paletteRef]);
 
 	return (
-		<PaletteDiv ref={paletteRef}>
-			{sortedPalette.length > 0 &&
-				sortedPalette.map(color => (
-					<Color
-						key={color.ral.code}
-						ral={color.ral.ral}
-						code={color.ral.code}
-						name={color.ral.name}
-						rgb={color.ral.rgb}
-					/>
-				))}
+		<PaletteDiv>
+			<div className='content' ref={paletteRef}>
+				{sortedPalette.length > 0 &&
+					sortedPalette.map(color => (
+						<Color
+							key={color.ral.code}
+							ral={color.ral.ral}
+							code={color.ral.code}
+							name={color.ral.name}
+							rgb={color.ral.rgb}
+						/>
+					))}
+			</div>
 		</PaletteDiv>
 	);
 };
