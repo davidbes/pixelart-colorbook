@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pixelart-colorbook/precache-manifest.78934e33d8b03009c82d3197dc7b6d2c.js"
+  "/pixelart-colorbook/precache-manifest.9a25b4328a589c26d40e802e079ab251.js"
 );
 
 self.addEventListener('message', (event) => {
